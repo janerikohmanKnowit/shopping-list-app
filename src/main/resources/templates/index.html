@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Shopping List Manager - Home</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            🛒 Shopping List Manager v1.0
+        </div>
+        
+        <div class="content">
+            <div class="info-box">
+                <strong>Welcome to Shopping List Manager!</strong><br>
+                Manage your shopping lists efficiently. Click "View" to see items in a list.
+            </div>
+
+            <h2>My Shopping Lists</h2>
+            
+            <table cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th width="50%">List Name</th>
+                        <th width="20%" class="center">Items</th>
+                        <th width="30%" class="center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${lists.isEmpty()}">
+                        <td colspan="3" class="center" style="padding: 20px; color: #999;">
+                            No shopping lists found. Create one below!
+                        </td>
+                    </tr>
+                    <tr th:each="list : ${lists}">
+                        <td>
+                            <strong th:text="${list.name}">List Name</strong>
+                        </td>
+                        <td class="center">
+                            <span th:text="${list.itemCount}">0</span> item(s)
+                        </td>
+                        <td class="center">
+                            <a th:href="@{/list/{id}(id=${list.id})}" class="button button-primary">
+                                View
+                            </a>
+                            <form th:action="@{/list/{id}/delete(id=${list.id})}" 
+                                  method="post" 
+                                  style="display: inline;"
+                                  onsubmit="return confirm('Are you sure you want to delete this list?');">
+                                <button type="submit" class="button button-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="form-section">
+                <h3>Create New Shopping List</h3>
+                <form action="/list/create" method="post">
+                    <input type="text" 
+                           name="listName" 
+                           placeholder="Enter list name (e.g., 'Weekly Groceries')" 
+                           required 
+                           maxlength="100">
+                    <button type="submit" class="button button-primary">Create List</button>
+                </form>
+            </div>
+
+            <div class="reset-section">
+                <form action="/reset" 
+                      method="post" 
+                      onsubmit="return confirm('This will delete all your lists and restore the default examples. Are you sure?');">
+                    <button type="submit" class="button button-danger">
+                        🔄 Reset All Data to Defaults
+                    </button>
+                </form>
+                <div style="font-size: 10px; color: #666; margin-top: 8px;">
+                    Warning: This will remove all your custom lists and items.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Shopping List Manager v1.0 | Demo Application | No data is persisted to disk
+        </div>
+    </div>
+</body>
+</html>
