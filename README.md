@@ -103,19 +103,6 @@ The application comes with 4 pre-populated shopping lists:
 - ✅ Delete a shopping list
 - ✅ Reset all data with the "Reset" button
 
-## ⚙️ Configuration
-
-### Change Port
-Edit `src/main/resources/application.properties`:
-```properties
-server.port=9090
-```
-
-### Enable Production Mode
-For production, enable Thymeleaf caching:
-```properties
-spring.thymeleaf.cache=true
-```
 
 ## 🐛 Known Limitations (By Design)
 
@@ -127,27 +114,6 @@ spring.thymeleaf.cache=true
 - ❌ Deliberately outdated UI
 
 These are **intentional** to provide learning opportunities!
-
-## 📦 Distribution
-
-To distribute the application to other computers:
-
-1. Build the JAR file:
-   ```bash
-   mvn clean package
-   ```
-
-2. Copy the JAR to target machine:
-   ```bash
-   cp target/shopping-list-app-1.0.0.jar /destination/
-   ```
-
-3. Run on any machine with Java 17+:
-   ```bash
-   java -jar shopping-list-app-1.0.0.jar
-   ```
-
-No additional files or configuration needed!
 
 ## 🛠️ Technology Stack
 
